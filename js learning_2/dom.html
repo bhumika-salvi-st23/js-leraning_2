@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOM Tree Structure Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>DOM Tree Structure Example</h2>
+
+<div>
+    <p>Paragraph inside div</p>
+    <span>Span inside div</span>
+</div>
+
+<ul>
+    <li>Item 1</li>
+    <li>Item 2</li>
+</ul>
+
+<h3>DOM Tree:</h3>
+<pre id="treeOutput"></pre>
+
+<script>
+// Function to show DOM tree structure
+function showDomTree(node, depth = 0) {
+    let indent = "  ".repeat(depth); // add spaces for hierarchy
+    let output = indent + node.tagName + "\n";
+
+    for (let i = 0; i < node.children.length; i++) {
+        output += showDomTree(node.children[i], depth + 1); // recursive for children
+    }
+
+    return output;
+}
+
+// Show the DOM tree starting from body
+document.getElementById("treeOutput").innerText = showDomTree(document.body);
+</script>
+
+</body>
+</html>
