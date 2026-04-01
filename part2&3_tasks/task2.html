@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ui event</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #counter{
+            padding: 10px;
+            margin: 10px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        button{
+            padding: 10px;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>counter app</h1>
+    <div id="counter">0</div>
+
+    <button id="decrrease">-</button>
+    <button id="increase">+</button>
+    <script>
+        let count = 0
+        const counterdiaply = document.getElementById('counter')
+        const increasebtn = document.getElementById('increase')
+        const decreasebtn = document.getElementById('decrrease')
+
+        increasebtn.addEventListener('click', () => {
+            count++
+            counterdiaply.textContent = count
+        })
+        decreasebtn.addEventListener('click', () => {
+            count--
+            counterdiaply.textContent = count
+        })
+    </script>
+</body>
+
+</html>
