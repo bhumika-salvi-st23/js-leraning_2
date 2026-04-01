@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Async Class Example</title>
+</head>
+<body>
+
+<h2>Async Class Demo</h2>
+<button onclick="runTask()">Fetch Data</button>
+<p id="output"></p>
+
+<script>
+class AsyncTask {
+    constructor(url) {
+        this.url = url;
+    }
+
+    async fetchData() {
+        try {
+            document.getElementById("output").innerText = "Loading...";
+            
+            let response = await fetch(this.url);
+            let data = await response.json();
+            
+            return data;
+        } catch (error) {
+            return "Error fetching data";
+        }
+    }
+
+    async run() {
+        let result = await this.fetchData();
+        document.getElementById("output").innerText = JSON.stringify(result, null, 2);
+    }
+}
+
+async function runTask() {
+    let task = new AsyncTask("https://jsonplaceholder.typicode.com/todos/1");
+    await task.run();
+}
+</script>
+
+</body>
+</html>

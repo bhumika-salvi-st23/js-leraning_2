@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>JS Data Example</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  input { margin: 5px 0; display: block; }
+  .output { margin-top: 15px; padding: 10px; border: 1px solid #ccc; width: 400px; white-space: pre-line; }
+</style>
+</head>
+<body>
+
+<h1>Simple JS Data Example</h1>
+
+<label>Name: <input type="text" id="name" value="Alice"></label>
+<label>Age: <input type="number" id="age" value="25"></label>
+<label>Job: <input type="text" id="job" value="Developer"></label>
+
+<button onclick="showData()">Show Data</button>
+<div class="output" id="output">Click "Show Data" to see info</div>
+
+<script>
+"use strict";
+
+
+const idSymbol = Symbol("id");
+
+
+function Person(name, age, job) {
+  this.name = name;
+  this.age = age;
+  this.job = job;
+  this[idSymbol] = Math.floor(Math.random()*10000);
+
+  this.greet = () => `Hello, my name is ${this.name}`;
+  this.toString = () => `${this.name}, ${this.age} years old, ${this.job}`;
+}
+
+
+function showData() {
+
+  const person = new Person(
+    document.getElementById("name").value,
+    Number(document.getElementById("age").value),
+    document.getElementById("job").value
+  );
+
+
+  const arr = [person.age, 10, 20];
+  const [firstAge] = arr;
+
+
+  const map = new Map([["Name", person.name], ["Job", person.job]]);
+  const set = new Set(arr);
+
+
+  const now = new Date();
+
+
+  const jsonStr = JSON.stringify(person);
+
+
+  const out = `
+Person greeting: ${person.greet()}
+Person details: ${person.toString()}
+Person ID (Symbol): ${person[idSymbol]}
+Array example: ${arr} (first age: ${firstAge})
+Map example: Name=${map.get("Name")}, Job=${map.get("Job")}
+Set example (unique): ${[...set]}
+Current date: ${now.toDateString()}
+JSON stringify: ${jsonStr}
+  `;
+  document.getElementById("output").textContent = out;
+}
+</script>
+
+</body>
+</html>

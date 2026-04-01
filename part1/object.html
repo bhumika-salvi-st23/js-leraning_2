@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reactive Person Object</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input {
+            margin: 5px 0;
+            display: block;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Reactive Person Object</h1>
+
+    <label>Name: <input type="text" id="name" value="Alice"></label>
+    <label>Age: <input type="number" id="age" value="25"></label>
+    <label>Job: <input type="text" id="job" value="Developer"></label>
+
+    <div class="output" id="personDetails">
+        Change any field to see updates here
+    </div>
+
+    <script>
+        "use strict";
+
+
+        const idSymbol = Symbol("id");
+
+
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this[idSymbol] = Math.floor(Math.random() * 10000); // unique ID
+
+
+            this.greet = function () {
+                return `Hello, my name is ${this.name}`;
+            };
+
+
+            this.toString = function () {
+                return `${this.name}, ${this.age} years old, ${this.job}`;
+            };
+        }
+
+
+        let person = new Person(
+            document.getElementById("name").value,
+            Number(document.getElementById("age").value),
+            document.getElementById("job").value
+        );
+
+
+        function updatePerson() {
+            person.name = document.getElementById("name").value;
+            person.age = Number(document.getElementById("age").value);
+            person.job = document.getElementById("job").value;
+
+            const detailsDiv = document.getElementById("personDetails");
+            detailsDiv.innerHTML = `
+    ${person.greet()}<br>
+    Details: ${person.toString()}<br>
+    Unique ID (Symbol): ${person[idSymbol]}<br>
+    Is adult? ${person.age >= 18 ? "Yes" : "No"}<br>
+    Object to primitive (string): ${String(person)}<br>
+    Object to primitive (number, age): ${Number(person.age)}
+  `;
+        }
+
+
+        ["name", "age", "job"].forEach(id => {
+            document.getElementById(id).addEventListener("input", updatePerson);
+        });
+
+        updatePerson();
+
+    </script>
+
+</body>
+
+</html>

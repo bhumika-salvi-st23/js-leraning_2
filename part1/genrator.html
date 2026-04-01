@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generator Demo</title>
+</head>
+<body>
+
+<h2>Even Numbers Generator</h2>
+<button onclick="showNext()">Next Number</button>
+<p id="output"></p>
+
+<script>
+
+    function* evenNumbers(limit) {
+        let num = 0;
+        while (num <= limit) {
+            yield num; 
+            num += 2;  
+            }
+    }
+
+    const gen = evenNumbers(10);
+
+    
+    function showNext() {
+        const result = gen.next(); 
+        if (!result.done) {
+            document.getElementById("output").innerText = result.value;
+        } else {
+            document.getElementById("output").innerText = "No more numbers!";
+        }
+    }
+</script>
+
+</body>
+</html>

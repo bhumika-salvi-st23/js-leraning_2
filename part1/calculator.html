@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input,
+        select,
+        button {
+            margin: 5px;
+        }
+
+        .output {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Simple JS Calculator</h1>
+
+    Number 1: <input type="number" id="num1"><br>
+    Number 2: <input type="number" id="num2"><br>
+    Operation:
+    <select id="operation">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select><br>
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="output" id="result"></div>
+
+    <script>
+        "use strict";
+
+
+        function calculate() {
+            let num1 = Number(document.getElementById("num1").value);
+            let num2 = Number(document.getElementById("num2").value);
+            let op = document.getElementById("operation").value;
+
+
+            let result;
+            if (op === "+") result = num1 + num2;
+            else if (op === "-") result = num1 - num2;
+            else if (op === "*") result = num1 * num2;
+            else if (op === "/") result = (num2 !== 0) ? num1 / num2 : "Infinity";
+            else result = "Invalid operation";
+
+
+            let evenOdd = (num1 % 2 === 0) ? "Even" : "Odd";
+            let bothPositive = (num1 > 0 && num2 > 0);
+            const square = n => n * n;
+            function greet(name) { return `Hello ${name || "User"}`; }
+
+            document.getElementById("result").innerHTML = `
+    ${greet("User")}<br>
+    Selected operation (${op}): ${result}<br>
+    Number 1 is ${evenOdd}<br>
+    Both positive? ${bothPositive}<br>
+    Square of Number 1: ${square(num1)}<br>
+  `;
+        }
+    </script>
+
+</body>
+
+</html>
